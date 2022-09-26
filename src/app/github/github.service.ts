@@ -9,14 +9,14 @@ import { UsersResponse } from '../types/user.types';
 export class GithubService {
   constructor(private _http: HttpClient) {}
 
-  searchUsers(searchTerm: string, page = 1, perPage = 9, sort = 'best match') {
+  searchUsers({ search = '', page = 1, per_page = 10, sort = 'best match' }) {
     return this._http.get<UsersResponse>(
-      `${environment.GITHUB_API_URL}/search/users?q=${searchTerm}`,
+      `${environment.GITHUB_API_URL}/search/users?q=${search}`,
       {
         params: {
-          page: page.toString(),
-          per_page: perPage.toString(),
-          sort: sort,
+          page,
+          per_page,
+          sort,
         },
       }
     );

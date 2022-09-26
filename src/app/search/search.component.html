@@ -27,7 +27,7 @@
       </div>
     </ng-container>
     <ng-template #showUsers>
-      <app-users [users]="users"></app-users>
+      <app-users [users]="users" (onPerPage)="onPerPage($event)"></app-users>
     </ng-template>
   </div>
 </div>

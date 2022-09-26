@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { GithubService } from '../github/github.service';
+import { SearchForm } from '../types/search.types';
 import { Item } from '../types/user.types';
 
 @Component({
@@ -9,26 +10,31 @@ import { Item } from '../types/user.types';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  showSplash = false;
-  searchForm: FormGroup = new FormGroup({});
+  showSplash = true;
+  searchForm = new FormGroup<SearchForm>({
+    search: new FormControl<string>('', { nonNullable: true }),
+    page: new FormControl<number>(1, { nonNullable: true }),
+    per_page: new FormControl<number>(10, { nonNullable: true }),
+  });
 
   users: Item[] = [];
 
   constructor(
-    private _formBuilder: FormBuilder,
     private _githubService: GithubService
-  ) {
-    this._initForm();
-  }
+  ) {}
 
   ngOnInit(): void {}
 
   onSubmit(): void {
     this.showSplash = false;
-    const searchTerm = this.searchForm.get('search')?.value;
+    this.searchUsers();
+  }
+
+  searchUsers(): void {
+    const searchTerms = this.searchForm.getRawValue();
     this._githubService
-      .searchUsers(searchTerm)
-      .subscribe(({ items, total_count }) => {
+      .searchUsers(searchTerms)
+      .subscribe(({ items }) => {
         this.users = items;
       });
   }
@@ -38,9 +44,8 @@ export class SearchComponent implements OnInit {
     this.showSplash = true;
   }
 
-  private _initForm(): void {
-    this.searchForm = this._formBuilder.group({
-      search: [''],
-    });
+  onPerPage(per_page: number): void {
+    this.searchForm.patchValue({ per_page });
+    this.searchUsers();
   }
 }

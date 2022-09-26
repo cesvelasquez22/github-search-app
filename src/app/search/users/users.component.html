@@ -10,7 +10,7 @@
   <div class="users-list">
     <a
       class="user"
-      *ngFor="let user of mockData"
+      *ngFor="let user of users"
       [href]="user.html_url"
       target="_blank"
     >
@@ -21,5 +21,5 @@
       <p class="user-type">{{ user.type }}</p>
     </a>
   </div>
-  <app-paginator></app-paginator>
+  <app-paginator (onChangePageSize)="onChangePageSize($event)"></app-paginator>
 </div>

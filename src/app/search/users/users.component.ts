@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Item } from 'src/app/types/user.types';
 
 @Component({
@@ -8,6 +8,7 @@ import { Item } from 'src/app/types/user.types';
 })
 export class UsersComponent implements OnInit {
   @Input() users: Item[] = [];
+  @Output() onPerPage = new EventEmitter<number>();
   page = 1;
 
   mockData: Item[] = [
@@ -229,6 +230,30 @@ export class UsersComponent implements OnInit {
       site_admin: false,
       score: 1,
     },
+    {
+      login: 'byterider',
+      id: 3521182,
+      node_id: 'MDQ6VXNlcjM1MjExODI=',
+      avatar_url: 'https://avatars.githubusercontent.com/u/3521182?v=4',
+      gravatar_id: '',
+      url: 'https://api.github.com/users/byterider',
+      html_url: 'https://github.com/byterider',
+      followers_url: 'https://api.github.com/users/byterider/followers',
+      following_url:
+        'https://api.github.com/users/byterider/following{/other_user}',
+      gists_url: 'https://api.github.com/users/byterider/gists{/gist_id}',
+      starred_url:
+        'https://api.github.com/users/byterider/starred{/owner}{/repo}',
+      subscriptions_url: 'https://api.github.com/users/byterider/subscriptions',
+      organizations_url: 'https://api.github.com/users/byterider/orgs',
+      repos_url: 'https://api.github.com/users/byterider/repos',
+      events_url: 'https://api.github.com/users/byterider/events{/privacy}',
+      received_events_url:
+        'https://api.github.com/users/byterider/received_events',
+      type: 'User',
+      site_admin: false,
+      score: 1,
+    },
   ];
 
   constructor() { }
@@ -246,6 +271,13 @@ export class UsersComponent implements OnInit {
     if (this.page < 9) {
       this.page++;
     }
+  }
+
+  onChangePageSize(pageSize: number) {
+    // this.pageSize = pageSize;
+    // this.page = 1;
+    // console.log('pageSize', pageSize);
+    this.onPerPage.emit(pageSize);
   }
 
 }
