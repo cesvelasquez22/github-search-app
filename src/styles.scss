@@ -5,3 +5,24 @@
     box-sizing: border-box;
     font-family: Inter var, Arial, Helvetica, sans-serif;
 }
+
+.btn {
+    background-color: #1a73e8;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    font-weight: 600;
+    background-color: #1a73e8;
+    color: #fff;
+}
+
+.btn-secondary {
+    background-color: #f1f3f4;
+    color: #000;
+}
