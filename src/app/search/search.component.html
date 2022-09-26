@@ -12,7 +12,7 @@
           formControlName="search"
         />
         <div class="actions">
-            <button type="submit" class="btn btn-primary" style="margin-right: 0.25rem;">Submit</button>
+            <button type="submit" class="btn btn-primary" style="margin-right: 0.25rem;" [disabled]="searchForm.invalid">Submit</button>
             <button type="reset" class="btn btn-secondary" (click)="onClear()">Clear</button>
         </div>
       </div>

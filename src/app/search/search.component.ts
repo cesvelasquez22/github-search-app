@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { GithubService } from '../github/github.service';
 import { SearchForm } from '../types/search.types';
 import { Item } from '../types/user.types';
@@ -12,16 +12,17 @@ import { Item } from '../types/user.types';
 export class SearchComponent implements OnInit {
   showSplash = true;
   searchForm = new FormGroup<SearchForm>({
-    search: new FormControl<string>('', { nonNullable: true }),
+    search: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
     page: new FormControl<number>(1, { nonNullable: true }),
     per_page: new FormControl<number>(10, { nonNullable: true }),
   });
 
   users: Item[] = [];
 
-  constructor(
-    private _githubService: GithubService
-  ) {}
+  constructor(private _githubService: GithubService) {}
 
   ngOnInit(): void {}
 
@@ -32,11 +33,9 @@ export class SearchComponent implements OnInit {
 
   searchUsers(): void {
     const searchTerms = this.searchForm.getRawValue();
-    this._githubService
-      .searchUsers(searchTerms)
-      .subscribe(({ items }) => {
-        this.users = items;
-      });
+    this._githubService.searchUsers(searchTerms).subscribe(({ items }) => {
+      this.users = items;
+    });
   }
 
   onClear(): void {
