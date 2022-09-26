@@ -8,17 +8,26 @@
           type="text"
           class="form-input"
           id="search"
-          placeholder="Search"
+          placeholder="Type an username..."
           formControlName="search"
         />
         <div class="actions">
             <button type="submit" class="btn btn-primary" style="margin-right: 0.25rem;">Submit</button>
-            <button type="submit" class="btn btn-secondary">Clear</button>
+            <button type="reset" class="btn btn-secondary" (click)="onClear()">Clear</button>
         </div>
       </div>
     </form>
   </div>
   <div class="users-list">
-    <p>users</p>
+    <ng-container *ngIf="showSplash; else showUsers">
+      <div class="splash">
+        <h2>Search Github Users</h2>
+        <p>Enter a username to search for a Github user</p>
+        <img src="assets/undraw_team_re_0bfe.svg" alt="github_users_splash">
+      </div>
+    </ng-container>
+    <ng-template #showUsers>
+      <app-users [users]="users"></app-users>
+    </ng-template>
   </div>
 </div>

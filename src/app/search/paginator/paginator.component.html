@@ -1,0 +1,18 @@
+<div class="paginator">
+  <div class="per-page">
+    <label for="per-page">Items per page: </label>
+    <select name="per-page" id="per-page">
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="50">50</option>
+    </select>
+  </div>
+  <div class="paginator-actions">
+    <button class="btn btn-paginator" (click)="onPrev()">|<</button>
+    <button class="btn btn-paginator" (click)="onPrev()"><</button>
+    <button class="btn btn-paginator" (click)="onNext()">></button>
+    <button class="btn btn-paginator" (click)="onNext()">>|</button>
+  </div>
+</div>
