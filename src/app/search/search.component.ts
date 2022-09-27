@@ -25,6 +25,7 @@ export class SearchComponent implements OnInit {
 
   users: Item[] = [];
   total_count = 0;
+  currentPage = 1;
 
   constructor(private _githubService: GithubService) {}
 
@@ -32,7 +33,7 @@ export class SearchComponent implements OnInit {
     this.searchForm.get('sort')?.valueChanges.pipe(
       switchMap((sort) => {
         const searchTerms = this.searchForm.getRawValue();
-        return this._githubService.searchUsers({...searchTerms, sort});
+        return this._githubService.searchUsers({...searchTerms, sort, page: this.currentPage});
       }),
     ).subscribe(({ items, total_count }) => {
       this.users = items;
@@ -42,28 +43,36 @@ export class SearchComponent implements OnInit {
 
   onSubmit(): void {
     this.showSplash = false;
+    this.currentPage = 1;
     this.searchUsers();
   }
 
   searchUsers(): void {
     const searchTerms = this.searchForm.getRawValue();
-    this._githubService.searchUsers(searchTerms).subscribe(({ items, total_count }) => {
+    this._githubService.searchUsers({...searchTerms, page: this.currentPage}).subscribe(({ items, total_count }) => {
       this.users = items;
       this.total_count = total_count;
     });
   }
 
   onClear(): void {
-    this.searchForm.reset();
     this.showSplash = true;
+    this.searchForm.reset({
+      search: '',
+      page: 1,
+      per_page: 10,
+      sort: 'best match',
+    }, { emitEvent: false });
   }
 
   onChangePage(page: number): void {
+    this.currentPage = page;
     this.searchForm.patchValue({ page });
     this.searchUsers();
   }
 
   onChangePageSize(per_page: number): void {
+    this.currentPage = 1;
     this.searchForm.patchValue({ per_page });
     this.searchUsers();
   }

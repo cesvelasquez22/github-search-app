@@ -7,10 +7,10 @@
   </div>
   <div class="info-page">
     <!-- TODO: show first page value -->
-    <p>Showing {{ page }}-{{ page * changeSizePageControl.value }} of {{ totalCount }} results</p>
+    <p>Showing {{ from }}-{{ to }} of {{ totalCount }} results</p>
   </div>
   <div class="paginator-actions">
-    <button class="btn btn-paginator" (click)="onPrev()"> < </button>
-    <button class="btn btn-paginator" (click)="onNext()"> > </button>
+    <button class="btn btn-paginator" (click)="onPrev()" [disabled]="to === totalCount"> < </button>
+    <button class="btn btn-paginator" (click)="onNext()" [disabled]="to === totalCount "> > </button>
   </div>
 </div>

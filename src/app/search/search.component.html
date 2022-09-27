@@ -13,7 +13,7 @@
         />
         <div class="actions">
             <button type="submit" class="btn btn-primary" style="margin-right: 0.25rem;" [disabled]="searchForm.invalid">Submit</button>
-            <button type="reset" class="btn btn-secondary" (click)="onClear()">Clear</button>
+            <button type="reset" class="btn btn-secondary" (click)="onClear(); $event.preventDefault()">Clear</button>
         </div>
       </div>
     </form>
@@ -36,7 +36,7 @@
         </select>
       </div>
       <app-users [users]="users"></app-users>
-      <app-paginator [totalCount]="total_count" (onChangePage)="onChangePage($event)" (onChangePageSize)="onChangePageSize($event)"></app-paginator>
+      <app-paginator [page]="currentPage" [totalCount]="total_count" (onChangePage)="onChangePage($event)" (onChangePageSize)="onChangePageSize($event)"></app-paginator>
     </ng-template>
   </div>
 </div>

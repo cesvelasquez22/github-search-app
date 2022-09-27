@@ -8,7 +8,7 @@ import { distinctUntilChanged, startWith, tap } from 'rxjs/operators';
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss'],
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent {
   changeSizePageControl = new FormControl<number>(10, { nonNullable: true });
 
   @Input() pageSizeOptions = [10, 20, 50, 100];
@@ -16,16 +16,27 @@ export class PaginatorComponent implements OnInit {
   @Output() onChangePage = new EventEmitter<number>();
   @Output() onChangePageSize = this.changeSizePageControl.valueChanges.pipe(
     distinctUntilChanged(),
-    tap((value) => {
-      this.page = 1;
-      this.onChangePage.emit(this.page);
-    }),
   );
-  page = 1;
+  // reset paginator
+  private _page = 1;
+  @Input() set page(value: number) {
+    this._page = value;
+  }
 
-  constructor() {}
+  get page() {
+    return this._page;
+  }
 
-  ngOnInit(): void {}
+  get from() {
+    return (this.page - 1) * this.changeSizePageControl.value + 1;
+  }
+
+  get to() {
+    return Math.min(
+      this.page * this.changeSizePageControl.value,
+      this.totalCount
+    );
+  }
 
   onPrev() {
     if (this.page > 1) {
