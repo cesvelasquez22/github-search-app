@@ -10,7 +10,7 @@ import { Item } from '../types/user.types';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  showSplash = false;
+  showSplash = true;
   searchForm = new FormGroup<SearchForm>({
     search: new FormControl<string>('', {
       nonNullable: true,
@@ -21,6 +21,7 @@ export class SearchComponent implements OnInit {
   });
 
   users: Item[] = [];
+  total_count = 0;
 
   constructor(private _githubService: GithubService) {}
 
@@ -33,14 +34,20 @@ export class SearchComponent implements OnInit {
 
   searchUsers(): void {
     const searchTerms = this.searchForm.getRawValue();
-    this._githubService.searchUsers(searchTerms).subscribe(({ items }) => {
+    this._githubService.searchUsers(searchTerms).subscribe(({ items, total_count }) => {
       this.users = items;
+      this.total_count = total_count;
     });
   }
 
   onClear(): void {
     this.searchForm.reset();
     this.showSplash = true;
+  }
+
+  onChangePage(page: number): void {
+    this.searchForm.patchValue({ page });
+    this.searchUsers();
   }
 
   onChangePageSize(per_page: number): void {

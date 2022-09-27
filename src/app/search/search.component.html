@@ -36,7 +36,7 @@
         </select>
       </div>
       <app-users [users]="users"></app-users>
-      <app-paginator (onChangePageSize)="onChangePageSize($event)"></app-paginator>
+      <app-paginator [totalCount]="total_count" (onChangePage)="onChangePage($event)" (onChangePageSize)="onChangePageSize($event)"></app-paginator>
     </ng-template>
   </div>
 </div>

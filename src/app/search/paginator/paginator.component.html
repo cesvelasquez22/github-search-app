@@ -1,17 +1,15 @@
 <div class="paginator">
   <div class="per-page">
     <label for="per-page">Items per page: </label>
-    <select name="per-page" id="per-page" [formControl]="changeSizePageControl">
+    <select name="per-page" id="per-page" [formControl]="changeSizePageControl" #perPage>
       <option *ngFor="let pageSize of pageSizeOptions" [value]="pageSize">{{pageSize}}</option>
     </select>
   </div>
   <div class="info-page">
-    <p>Showing 1-10 of 1000 results</p>
+    <p>Showing {{ page }}-{{ page * changeSizePageControl.value }} of {{ totalCount }} results</p>
   </div>
   <div class="paginator-actions">
-    <button class="btn btn-paginator" (click)="onPrev()">| <</button>
-    <button class="btn btn-paginator" (click)="onPrev()"><</button>
-    <button class="btn btn-paginator" (click)="onNext()">></button>
-    <button class="btn btn-paginator" (click)="onNext()">>| </button>
+    <button class="btn btn-paginator" (click)="onPrev()"> < </button>
+    <button class="btn btn-paginator" (click)="onNext()"> > </button>
   </div>
 </div>
