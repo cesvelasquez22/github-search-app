@@ -27,8 +27,8 @@
       </div>
     </ng-container>
     <ng-template #showUsers>
-      <div class="sort-select">
-        <select name="sort" id="sort">
+      <div class="sort-select" [formGroup]="searchForm">
+        <select name="sort" id="sort" formControlName="sort">
           <option value="best match">Best Match</option>
           <option value="followers">Followers</option>
           <option value="repositories">Repositories</option>

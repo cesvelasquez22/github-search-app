@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { switchMap } from 'rxjs/operators';
 import { GithubService } from '../github/github.service';
 import { SearchForm } from '../types/search.types';
 import { Item } from '../types/user.types';
@@ -18,14 +19,26 @@ export class SearchComponent implements OnInit {
     }),
     page: new FormControl<number>(1, { nonNullable: true }),
     per_page: new FormControl<number>(10, { nonNullable: true }),
+    sort: new FormControl<string>('best match', { nonNullable: true }),
   });
+  sortControl = new FormControl<string>('best match', { nonNullable: true });
 
   users: Item[] = [];
   total_count = 0;
 
   constructor(private _githubService: GithubService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.searchForm.get('sort')?.valueChanges.pipe(
+      switchMap((sort) => {
+        const searchTerms = this.searchForm.getRawValue();
+        return this._githubService.searchUsers({...searchTerms, sort});
+      }),
+    ).subscribe(({ items, total_count }) => {
+      this.users = items;
+      this.total_count = total_count;
+    });
+  }
 
   onSubmit(): void {
     this.showSplash = false;
