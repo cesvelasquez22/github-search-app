@@ -10,7 +10,7 @@ import { Item } from '../types/user.types';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  showSplash = true;
+  showSplash = false;
   searchForm = new FormGroup<SearchForm>({
     search: new FormControl<string>('', {
       nonNullable: true,
@@ -43,7 +43,7 @@ export class SearchComponent implements OnInit {
     this.showSplash = true;
   }
 
-  onPerPage(per_page: number): void {
+  onChangePageSize(per_page: number): void {
     this.searchForm.patchValue({ per_page });
     this.searchUsers();
   }

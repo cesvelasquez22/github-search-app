@@ -18,7 +18,7 @@
       </div>
     </form>
   </div>
-  <div class="users-list">
+  <div class="users-container">
     <ng-container *ngIf="showSplash; else showUsers">
       <div class="splash">
         <h2>Search Github Users</h2>
@@ -27,7 +27,16 @@
       </div>
     </ng-container>
     <ng-template #showUsers>
-      <app-users [users]="users" (onPerPage)="onPerPage($event)"></app-users>
+      <div class="sort-select">
+        <select name="sort" id="sort">
+          <option value="best match">Best Match</option>
+          <option value="followers">Followers</option>
+          <option value="repositories">Repositories</option>
+          <option value="joined">Joined</option>
+        </select>
+      </div>
+      <app-users [users]="users"></app-users>
+      <app-paginator (onChangePageSize)="onChangePageSize($event)"></app-paginator>
     </ng-template>
   </div>
 </div>

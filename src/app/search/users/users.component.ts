@@ -6,10 +6,8 @@ import { Item } from 'src/app/types/user.types';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent {
   @Input() users: Item[] = [];
-  @Output() onPerPage = new EventEmitter<number>();
-  page = 1;
 
   mockData: Item[] = [
     {
@@ -255,29 +253,5 @@ export class UsersComponent implements OnInit {
       score: 1,
     },
   ];
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  onPrev() {
-    if (this.page > 1) {
-      this.page--;
-    }
-  }
-
-  onNext() {
-    if (this.page < 9) {
-      this.page++;
-    }
-  }
-
-  onChangePageSize(pageSize: number) {
-    // this.pageSize = pageSize;
-    // this.page = 1;
-    // console.log('pageSize', pageSize);
-    this.onPerPage.emit(pageSize);
-  }
 
 }
