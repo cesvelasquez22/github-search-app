@@ -8,5 +8,5 @@ import { Item } from 'src/app/types/user.types';
 })
 export class UserComponent {
   @Input()
-  user: Item | Partial<Item> | undefined;
+  user: Item | undefined;
 }

@@ -37,7 +37,7 @@ exports[`UserComponent should render user 1`] = `
 >
   <a
     class="user"
-    href="test"
+    href="https://github.com/ces"
     target="_blank"
   >
     <div
@@ -45,18 +45,18 @@ exports[`UserComponent should render user 1`] = `
     >
       <img
         alt="user_avatar"
-        src="test"
+        src="https://avatars.githubusercontent.com/u/112995?v=4"
       />
     </div>
     <h3
       class="user-name truncate"
     >
-      test
+      ces
     </h3>
     <p
       class="user-type"
     >
-      
+      User
     </p>
   </a>
 </div>
