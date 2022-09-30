@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { UsersResponse } from '../types/user.types';
+
+const GITHUB_API_URL = 'https://api.github.com';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class GithubService {
 
   searchUsers({ search = '', page = 1, per_page = 10, sort = 'best match' }) {
     return this._http.get<UsersResponse>(
-      `${environment.GITHUB_API_URL}/search/users?q=${search}`,
+      `${GITHUB_API_URL}/search/users?q=${search}`,
       {
         params: {
           page,
