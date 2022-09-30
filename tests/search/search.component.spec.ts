@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { GithubService } from '../github/github.service';
+import { GithubService } from '../../src/app/github/github.service';
 
-import { SearchComponent } from './search.component';
+import { SearchComponent } from '../../src/app/search/search.component';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { SearchForm } from '../types/search.types';
+import { SearchForm } from '../../src/app/types/search.types';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;

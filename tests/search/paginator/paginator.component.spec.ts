@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { PaginatorComponent } from './paginator.component';
+import { PaginatorComponent } from '../../../src/app/search/paginator/paginator.component';
 
 describe('PaginatorComponent', () => {
   let component: PaginatorComponent;
