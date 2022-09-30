@@ -28,28 +28,27 @@ export class PaginatorComponent {
   }
 
   get from() {
-    return (this.page - 1) * this.changeSizePageControl.value + 1;
+    return (this._page - 1) * this.changeSizePageControl.value + 1;
   }
 
   get to() {
     return Math.min(
-      this.page * this.changeSizePageControl.value,
+      this._page * this.changeSizePageControl.value,
       this.totalCount
     );
   }
 
   onPrev() {
-    if (this.page > 1) {
-      this.page--;
-      this.onChangePage.emit(this.page);
+    if (this._page > 1) {
+      this._page -= 1;
+      this.onChangePage.emit(this._page);
     }
   }
 
   onNext() {
-    console.log('onNext', this.changeSizePageControl.value);
-    if (this.page < this.changeSizePageControl.value) {
-      this.page++;
-      this.onChangePage.emit(this.page);
+    if (this._page < this.changeSizePageControl.value) {
+      this._page += 1;
+      this.onChangePage.emit(this._page);
     }
   }
 }
