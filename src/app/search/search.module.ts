@@ -6,13 +6,15 @@ import { SearchComponent } from './search.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from './users/users.component';
 import { PaginatorComponent } from './paginator/paginator.component';
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
   declarations: [
     SearchComponent,
     UsersComponent,
-    PaginatorComponent
+    PaginatorComponent,
+    UserComponent
   ],
   imports: [
     CommonModule,
